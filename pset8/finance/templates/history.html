@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your transactions
+{% endblock %}
+
+{% block main %}
+<p>Brought stocks</p>
+<table class="table table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Shares</th>
+      <th scope="col">Symbol</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for stock in buy %}
+      <tr>
+        <th scope="row">{{ stock["shares"] }}</th>
+        <td>{{ stock["symbol"] }}</td>
+        <td>{{ stock["cost"] }}</td>
+        <td>{{ stock["datetime"] }}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<p>Sold stocks</p>
+<table class="table table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Shares</th>
+      <th scope="col">Symbol</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for stock in sell %}
+      <tr>
+        <th scope="row">{{ stock["shares"] }}</th>
+        <td>{{ stock["symbol"] }}</td>
+        <td>{{ stock["cost"] }}</td>
+        <td>{{ stock["datetime"] }}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

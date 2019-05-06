@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your portfolio
+{% endblock %}
+
+{% block main %}
+
+<table class="table table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Share</th>
+      <th scope="col">Current Value</th>
+      <th scope="col">Total Value</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for stock in portfolio %}
+      <tr>
+        <th scope="row">{{ stock["symbol"] }}</th>
+        <td>{{ stock["shares"] }}</td>
+        <td>{{ stock["price"] }}</td>
+        <td>{{ stock["total"] }}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p>Your available balance: {{ cash }} <button onclick="return addMoney()">Add more money</button></p>
+<p>Your total value of portfolio is {{ total }}</p>
+
+<script>
+  // prompt the user to add money to his balance
+  function addMoney(){
+    var money = prompt("Please enter amount");
+    if (money != null && money > 0)
+      $.post('/add?money=' + money,
+      function() {
+        location.reload(true);
+      });
+  }
+</script>
+{% endblock %}
